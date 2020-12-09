@@ -80,7 +80,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', (req, res, next) => {
-    console.log(req.body);
     req.body.datetime = new Date(req.body.datetime);
     req.body.datetime_end = new Date(req.body.datetime);
     req.body.datetime_end.setHours(req.body.datetime.getHours() + 1);
