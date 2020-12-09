@@ -1,6 +1,35 @@
 <template>
   <div class="reservations">
     <h2>Reservations</h2>
+    <div>
+      <div class="reservation-form form-group">
+        <label for="date">Date</label>
+        <input type="date" class="form-control" id="date" placeholder="Enter datetime" v-model="date">
+      </div>
+      <div class="reservation-form form-group">
+        <label for="time">Time</label>
+        <input type="time" class="form-control" id="time" placeholder="Enter datetime" v-model="time">
+      </div>
+      <div class="form-group">
+        <button v-on:click="searchOccupied" class="btn btn-primary">Search</button>
+      </div>
+      <div class="reservation-form form-group">
+        <label for="select">Capacity</label>
+        <select v-model="capacitySelected" multiple="" class="form-control" id="select">
+          <option v-for="option in capacity" v-bind:value="option" :key="option">
+            {{ option }}
+          </option>
+        </select>
+      </div>
+      <div class="reservation-form form-group">
+        <label for="select2">Equipements</label>
+        <select v-model="equipementsSelected" multiple="" class="form-control" id="select2">
+          <option v-for="option in equipements" v-bind:value="option" :key="option">
+            {{ option }}
+          </option>
+        </select>
+      </div>
+    </div>
     <Search v-bind:equipements="equipements"
       v-bind:capacity="capacity"
       v-bind:equipementsSelected="equipementsSelected"
@@ -9,10 +38,7 @@
       v-on:update-capacitySelected="capacitySelected = $event"
       v-on:search-occupied="searchOccupied()"
       v-on:update-datetime="datetime = $event"/>
-    <Rooms v-on:update="searchOccupied()"
-      v-if="searched"
-      v-bind:rooms="roomsFiltered"
-      v-bind:datetime="datetime"/>
+    <Rooms v-on:update="searchOccupied()" v-if="searched" v-bind:rooms="roomsFiltered" v-bind:datetime="datetime"/>
   </div>
 </template>
 
@@ -35,6 +61,8 @@ export default {
       capacitySelected: [],
       equipementsSelected: [],
       roomsOccupied: [],
+      date: null,
+      time: null,
       datetime: null,
       searched: false
     }
@@ -43,6 +71,7 @@ export default {
     axios
       .get('http://0.0.0.0:3000/rooms')
       .then(response => {
+        // JSON responses are automatically parsed.
         this.rooms = response.data.rooms;
         this.capacity = this.rooms.map(function(room) {
           return room.capacity;
@@ -103,6 +132,11 @@ export default {
   },
   methods: {
     searchOccupied: function () {
+      // if (!this.datetime) {
+      //   alert('Please choose a date and a time');
+      //   return;
+      // }
+      console.log(this.datetime);
       this.roomsOccupied = [];
       axios.post('http://0.0.0.0:3000/rooms/occupied', {
         datetime: this.datetime
@@ -120,5 +154,12 @@ export default {
 <style scoped>
 .reservations {
   margin-top: 30px;
+}
+.reservation-form {
+  width: 50%;
+  display: inline-block;
+}
+.card {
+  display: inline-block;
 }
 </style>

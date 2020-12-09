@@ -38,11 +38,13 @@ export default {
   },
   methods: {
     book: function (room) {
+      var vm = this;
       axios.post('http://0.0.0.0:3000/rooms', {
         room: room.name,
         datetime: this.datetime
-      });
-      console.log(room);
+      }).then(function() {
+        vm.$emit('update');
+      })
     }
   }
 }
