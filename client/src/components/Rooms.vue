@@ -39,7 +39,7 @@ export default {
   methods: {
     book: function (room) {
       var vm = this;
-      axios.post('http://0.0.0.0:3000/reservations', {
+      axios.post(this.$serverUrl + '/reservations', {
         room: room.name,
         datetime: this.datetime
       }).then(function() {

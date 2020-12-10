@@ -41,7 +41,7 @@ export default {
   },
   mounted () {
     axios
-      .get('http://0.0.0.0:3000/rooms')
+      .get(this.$serverUrl + '/rooms')
       .then(response => {
         this.rooms = response.data.rooms;
         this.capacity = this.rooms.map(function(room) {
@@ -101,7 +101,7 @@ export default {
   methods: {
     searchOccupied: function () {
       this.roomsOccupied = [];
-      axios.post('http://0.0.0.0:3000/reservations/occupied', {
+      axios.post(this.$serverUrl + '/reservations/occupied', {
         datetime: this.datetime
       }).then(response => {
         this.searched = true;

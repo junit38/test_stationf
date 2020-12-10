@@ -20,7 +20,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
+
+var corsOptions = {
+    origin: 'http://0.0.0.0:8080',
+}
+
+app.use(cors(corsOptions));
 
 app.use('/', indexRouter);
 app.use('/rooms', roomsRouter);
