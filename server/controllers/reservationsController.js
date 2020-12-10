@@ -14,10 +14,10 @@ exports.create = function(req, res) {
 			room: req.body.room,
 			datetime: req.body.datetime
 		}
-		if (!reservation.room)
+		if (!reservation.room || !reservation.datetime)
 		{
 			res.status(400);
-			res.send("Missing room name.");
+			res.send("Missing room name or datetime.");
 		}
 		else
 		{
@@ -57,8 +57,8 @@ exports.create = function(req, res) {
 };
 
 exports.getOccupiedByName = function(req, res, next) {
-	let datetime = req.body.datetime;
 	let room = req.body.room;
+	let datetime = req.body.datetime;
 	if (!datetime)
 	{
 		res.status(400)
