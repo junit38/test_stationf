@@ -84,7 +84,6 @@ exports.getOccupiedByName = function(req, res, next) {
 		    }).then((reservation) => {
 		    	if (reservation)
 		    	{
-		    		console.log('here1');
 			        req.reservation = reservation;
 		            next();
 		    	}
