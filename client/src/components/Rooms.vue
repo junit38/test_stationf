@@ -39,11 +39,13 @@ export default {
   methods: {
     book: function (room) {
       var vm = this;
-      axios.post('http://0.0.0.0:3000/rooms', {
+      axios.post('http://0.0.0.0:3000/reservations', {
         room: room.name,
         datetime: this.datetime
       }).then(function() {
         vm.$emit('update');
+      }).catch(function(error) {
+        alert(error.response.data);
       })
     }
   }

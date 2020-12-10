@@ -92,26 +92,25 @@ export default {
       }
 
       return this.rooms.filter(function (room) {
-        if (room)
-        {
           return (vm.capacitySelected.length == 0 || vm.capacitySelected.indexOf(room.capacity) != -1) &&
           (vm.equipementsSelected.length == 0 || containEquipement(room)) &&
-          (vm.roomsOccupied.length == 0 || !containRoomName(room));
-        }
+          (vm.roomsOccupied.length == 0 || containRoomName(room));
       })
     }
   },
   methods: {
     searchOccupied: function () {
       this.roomsOccupied = [];
-      axios.post('http://0.0.0.0:3000/rooms/occupied', {
+      axios.post('http://0.0.0.0:3000/reservations/occupied', {
         datetime: this.datetime
       }).then(response => {
         this.searched = true;
         for (var i = 0; i < response.data.length; i++) {
           this.roomsOccupied.push(response.data[i].room)
         }
-      });
+      }).catch(error => {
+        alert(error.response.data);
+      })
     }
   }
 }
