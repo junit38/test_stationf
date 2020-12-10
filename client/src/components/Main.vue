@@ -94,7 +94,7 @@ export default {
       return this.rooms.filter(function (room) {
           return (vm.capacitySelected.length == 0 || vm.capacitySelected.indexOf(room.capacity) != -1) &&
           (vm.equipementsSelected.length == 0 || containEquipement(room)) &&
-          (vm.roomsOccupied.length == 0 || containRoomName(room));
+          (vm.roomsOccupied.length == 0 || !containRoomName(room));
       })
     }
   },

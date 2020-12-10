@@ -43,6 +43,7 @@ export default {
         room: room.name,
         datetime: this.datetime
       }).then(function() {
+        alert('Room booked!');
         vm.$emit('update');
       }).catch(function(error) {
         alert(error.response.data);
