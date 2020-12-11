@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="room in rooms" :key="room.id" class="card border-primary mb-3" style="max-width: 20rem;">
+    <div v-for="room in rooms" :key="room.name" class="card border-primary mb-3" style="max-width: 20rem;">
       <div class="card-header">{{ room.name }}</div>
       <div class="card-body">
         <h4 class="card-title">{{ room.name }}</h4>
