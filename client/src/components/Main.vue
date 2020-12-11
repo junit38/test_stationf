@@ -50,10 +50,8 @@ export default {
         this.capacity = this.capacity.filter(function(capacity, index, self) {
           return self.indexOf(capacity) === index;
         })
-        for (let i = 0; i < this.rooms.length; i++)
-        {
-          for (let j = 0; j < this.rooms[i].equipements.length; j++)
-          {
+        for (let i = 0; i < this.rooms.length; i++) {
+          for (let j = 0; j < this.rooms[i].equipements.length; j++) {
             if (this.equipements.indexOf(this.rooms[i].equipements[j].name) == -1)
               this.equipements.push(this.rooms[i].equipements[j].name)
           }
@@ -65,8 +63,7 @@ export default {
       let vm = this;
 
       function containEquipementRoom(room, equipement) {
-        for (let i = 0; i < room.equipements.length; i++)
-        {
+        for (let i = 0; i < room.equipements.length; i++) {
           if (room.equipements[i].name == equipement)
             return true;
         }
@@ -74,8 +71,7 @@ export default {
       }
 
       function containEquipement(room) {
-        for (let i = 0; i < vm.equipementsSelected.length; i++)
-        {
+        for (let i = 0; i < vm.equipementsSelected.length; i++) {
           if (!containEquipementRoom(room, vm.equipementsSelected[i]))
             return false;
         }
@@ -83,8 +79,7 @@ export default {
       }
 
       function containRoomName(room) {
-        for (let i = 0; i < vm.roomsOccupied.length; i++)
-        {
+        for (let i = 0; i < vm.roomsOccupied.length; i++) {
           if (room.name === vm.roomsOccupied[i])
             return true;
         }
