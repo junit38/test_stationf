@@ -22,7 +22,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var corsOptions = {
-    origin: 'http://0.0.0.0:8080',
+    origin: [
+    	'http://0.0.0.0:8080',
+    	'http://localhost:8080'
+    ]
 }
 
 app.use(cors(corsOptions));
